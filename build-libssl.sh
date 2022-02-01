@@ -493,6 +493,12 @@ if [ ${#OPENSSLCONF_ALL[@]} -gt 1 ]; then
 
     # Determine define condition
     case "${OPENSSLCONF_CURRENT}" in
+      *_macos_x86_64.h)
+        DEFINE_CONDITION="TARGET_OS_OSX && TARGET_CPU_X86_64"
+      ;;
+      *_macos_arm64.h)
+        DEFINE_CONDITION="TARGET_OS_OSX && TARGET_CPU_ARM64"
+      ;;
       *_ios_x86_64.h)
         DEFINE_CONDITION="TARGET_OS_IOS && TARGET_OS_SIMULATOR && TARGET_CPU_X86_64"
       ;;

@@ -24,7 +24,7 @@ do
   # Determine relevant SDK version
   if [[ "${TARGET}" == tvos* ]]; then
     SDKVERSION="${TVOS_SDKVERSION}"
-  elif [[ "${TARGET}" == "mac-catalyst"* ]]; then
+  elif [[ "${TARGET}" == "mac-"* ]]; then
     SDKVERSION="${MACOSX_SDKVERSION}"
   else
     SDKVERSION="${IOS_SDKVERSION}"
@@ -43,7 +43,7 @@ do
     PLATFORM="AppleTVSimulator"
   elif [[ "${TARGET}" == "tvos64-cross-"* ]]; then
     PLATFORM="AppleTVOS"
-  elif [[ "${TARGET}" == "mac-catalyst-"* ]]; then
+  elif [[ "${TARGET}" == "mac-"* ]]; then
     PLATFORM="MacOSX"
   else
     PLATFORM="iPhoneOS"
@@ -56,6 +56,7 @@ do
   export CROSS_COMPILE="${DEVELOPER}/Toolchains/XcodeDefault.xctoolchain/usr/bin/"
   export CROSS_TOP="${DEVELOPER}/Platforms/${PLATFORM}.platform/Developer"
   export CROSS_SDK="${PLATFORM}${SDKVERSION}.sdk"
+  export SDKROOT="${CROSS_TOP}/SDKs/${CROSS_SDK}"
 
   # Prepare TARGETDIR and SOURCEDIR
   prepare_target_source_dirs
